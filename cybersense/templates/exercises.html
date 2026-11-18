@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% set active = 'exercises' %}
+{% block title %}Exercises - CyberSense{% endblock %}
+
+{% block content %}
+<h1>Exercises</h1>
+<p>Five short scenarios based on the most common online scams. Complete them in any order,
+   or start from the first one and use the "Next Exercise" button.</p>
+<p id="summary" class="progress-label"></p>
+<div class="grid" id="list">Loading exercises...</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  Promise.all([apiGet('/api/exercises'), apiGet('/api/progress')])
+    .then(([list, progress]) => {
+      const status = {};
+      progress.details.forEach(d => status[d.id] = d.status);
+      document.getElementById('summary').textContent =
+        'Completed ' + progress.completed + ' of ' + progress.total + ' exercises.';
+      document.getElementById('list').innerHTML =
+        list.map(ex => exerciseCard(ex, status[ex.id])).join('');
+    })
+    .catch(() => {
+      document.getElementById('list').textContent = 'Could not load exercises. Is the Flask server running?';
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% set active = 'exercises' %}
+{% block title %}Exercise - CyberSense{% endblock %}
+
+{% block content %}
+<div class="btn-row" style="margin-top:0;margin-bottom:16px">
+  <a class="btn secondary" href="/exercises">&larr; Back to Exercises</a>
+</div>
+
+<div id="exercise">Loading exercise...</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/exercise.js"></script>
+{% endblock %}

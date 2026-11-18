@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% set active = 'progress' %}
+{% block title %}My Progress - CyberSense{% endblock %}
+
+{% block content %}
+<h1>My Progress</h1>
+<p>Results from your current training session.</p>
+
+<div class="stats">
+  <div class="stat"><div class="value" id="completed">-</div><div class="label">Completed exercises</div></div>
+  <div class="stat"><div class="value" id="correct">-</div><div class="label">Correct answers</div></div>
+  <div class="stat"><div class="value" id="score">-</div><div class="label">Total score</div></div>
+  <div class="stat"><div class="value" id="percent">-</div><div class="label">Completion</div></div>
+</div>
+
+<div class="card" style="margin-top:20px">
+  <strong>Training completion</strong>
+  <div class="bar" style="margin-top:8px"><div id="bar" style="width:0%"></div></div>
+  <p id="message"></p>
+</div>
+
+<div class="card">
+  <h2 style="margin-top:0">Exercise results</h2>
+  <table>
+    <thead><tr><th>Exercise</th><th>Result</th><th></th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+</div>
+
+<div class="btn-row">
+  <button class="btn" id="restart">Restart Training</button>
+  <a class="btn secondary" href="/exercises">Back to Exercises</a>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const LABELS = {
+    correct: '<span class="tag done">Correct &#10003;</span>',
+    incorrect: '<span class="tag wrong">Incorrect &#10007;</span>',
+    not_started: '<span class="tag">Not started</span>'
+  };
+
+  function load() {
+    apiGet('/api/progress').then(p => {
+      document.getElementById('completed').textContent = p.completed + ' / ' + p.total;
+      document.getElementById('correct').textContent = p.correct + ' / ' + p.total;
+      document.getElementById('score').textContent = p.score + ' / ' + p.max_score;
+      document.getElementById('percent').textContent = p.percent + '%';
+      document.getElementById('bar').style.width = p.percent + '%';
+
+      let msg = 'You have not started yet. Click "Start exercise" on any row below.';
+      if (p.completed === p.total) {
+        msg = p.correct === p.total
+          ? 'Excellent! You recognised every scam.'
+          : 'Training complete. Review the exercises you missed and try them again.';
+      } else if (p.completed > 0) {
+        msg = 'Keep going - ' + (p.total - p.completed) + ' exercise(s) left.';
+      }
+      document.getElementById('message').textContent = msg;
+
+      document.getElementById('rows').innerHTML = p.details.map(d => `
+        <tr>
+          <td><img src="/static/img/${esc(d.icon)}" alt="">${d.id}. ${esc(d.title)}</td>
+          <td>${LABELS[d.status]}</td>
+          <td><a href="/exercise/${d.id}">${d.status === 'not_started' ? 'Start exercise' : 'Try again'}</a></td>
+        </tr>`).join('');
+    });
+  }
+
+  document.getElementById('restart').onclick = () => {
+    if (!confirm('Restart training? Your current results will be cleared.')) return;
+    apiPost('/api/progress/reset').then(() => { location.href = '/exercise/1'; });
+  };
+
+  load();
+</script>
+{% endblock %}
