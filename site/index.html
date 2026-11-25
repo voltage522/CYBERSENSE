@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="theme-color" content="#f5f3ee">
+  <meta name="description" content="Тренажёр, который учит распознавать мошенничество: короткие уроки, разные задания, путь по темам.">
+  <title>CyberSense — путь по урокам</title>
+  <link rel="icon" href="img/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar" id="topbar"></header>
+
+  <main class="wrap map-layout">
+    <div class="path-col">
+      <div class="goal-mini" id="goal-mini"></div>
+      <div id="welcome"></div>
+      <div id="units"></div>
+      <p class="path-end"></p>
+    </div>
+
+    <aside class="side" aria-label="Цель и подсказки">
+      <section class="side-card" id="goal"></section>
+      <section class="side-card">
+        <h2 class="side-title">Как оценивать ситуации</h2>
+        <dl class="legend" id="legend"></dl>
+      </section>
+      <p class="side-note">CyberSense — учебный тренажёр, а не проверка реальных сообщений. Все люди, номера и ссылки
+        в заданиях вымышлены, учебные интерфейсы ничего не отправляют.</p>
+    </aside>
+  </main>
+
+  <div class="node-pop" id="pop" role="dialog" aria-modal="false" hidden></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/lessons.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/map.js"></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="theme-color" content="#f5f3ee">
+  <title>Прогресс — CyberSense</title>
+  <link rel="icon" href="img/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar" id="topbar"></header>
+
+  <main class="wrap narrow-page">
+    <div class="page-head">
+      <h1>Прогресс</h1>
+      <p>Результаты сохраняются только в этом браузере.</p>
+    </div>
+    <div id="content"></div>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/lessons.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/ui.js"></script>
+  <script>
+    function render() {
+      renderTopbar('progress');
+      const nodes = allNodes();
+      const d = Store.data();
+      const done = nodes.filter(n => n.status === 'done');
+      const stars = done.reduce((a, n) => a + n.stars, 0);
+      const s = streak();
+      const content = document.getElementById('content');
+
+      if (done.length === 0) {
+        content.innerHTML = `
+          <div class="empty">
+            <p>Здесь появятся ваши звёзды, опыт и серия дней. Пройдите первый урок — он займёт пару минут.</p>
+            <a class="btn primary" href="index.html#current">К первому уроку ${icon('arrowRight')}</a>
+          </div>`;
+        return;
+      }
+
+      content.innerHTML = `
+        <div class="summary">
+          <div><p class="label">${icon('bolt')} Опыт</p><p class="value">${d.xp} XP</p></div>
+          <div><p class="label">${icon('flame')} Серия</p><p class="value">${s} ${plural(s, ['день', 'дня', 'дней'])}</p></div>
+          <div><p class="label">${icon('star')} Звёзды</p><p class="value">${stars}/${nodes.length * 3}</p></div>
+          <div><p class="label">${icon('check')} Уроки</p><p class="value">${done.length}/${nodes.length}</p></div>
+        </div>
+
+        <div class="unit-progress">
+          ${CS_DATA.topics.map(unit => {
+            const list = nodes.filter(n => n.unit === unit);
+            return `
+              <section class="up-unit" style="--u:${CS_MAP[unit.id].color}">
+                <h2><span class="unit-icon small">${icon(unit.icon)}</span>${esc(unit.title)}</h2>
+                <ul class="up-list">
+                  ${list.map(n => {
+                    const rec = Store.node(n.id);
+                    return `<li>
+                      <span class="up-name">${esc(n.title)}</span>
+                      <span class="up-stars" aria-label="${rec ? `Звёзд: ${rec.stars} из 3` : 'Не пройдено'}">${[0, 1, 2].map(i => starIcon(rec && i < rec.stars)).join('')}</span>
+                      <span class="up-best num">${rec ? rec.best + '%' : '—'}</span>
+                      ${n.status === 'locked' ? '<span class="up-go muted">Закрыто</span>'
+                        : `<a class="up-go" href="lesson.html?n=${encodeURIComponent(n.id)}">${rec ? 'Повторить' : 'Начать'}</a>`}
+                    </li>`;
+                  }).join('')}
+                </ul>
+              </section>`;
+          }).join('')}
+        </div>
+        <p class="muted small-note">Процент — доля заданий, решённых с первой попытки в лучшем прохождении.</p>
+
+        <div class="actions progress-actions">
+          <a class="btn primary" href="index.html#current">Продолжить путь</a>
+          <button class="btn" id="reset">${icon('rotate')} Начать всё заново</button>
+        </div>`;
+
+      document.getElementById('reset').addEventListener('click', () => {
+        if (!confirm('Сбросить весь прогресс: опыт, серию и звёзды? Это нельзя отменить.')) return;
+        Store.reset();
+        render();
+      });
+    }
+    render();
+  </script>
+</body>
+</html>

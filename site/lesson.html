@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="theme-color" content="#f5f3ee">
+  <title>Урок — CyberSense</title>
+  <link rel="icon" href="img/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="lesson-page">
+  <div class="lesson-app">
+    <header class="lesson-top">
+      <div class="narrow lesson-top-inner">
+        <button class="icon-btn" id="quit" aria-label="Выйти из урока">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+        <div class="lbar" role="progressbar" aria-label="Прогресс урока" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="bar"></span></div>
+        <div class="lesson-status" id="status"></div>
+      </div>
+    </header>
+
+    <main class="lesson-stage" id="stage" tabindex="-1"></main>
+
+    <footer class="lesson-foot" id="foot">
+      <div class="narrow foot-inner">
+        <div class="fb" id="fb" aria-live="polite"></div>
+        <button class="btn primary big" id="action" disabled>Проверить</button>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/lessons.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/exercises.js"></script>
+  <script src="js/lesson.js"></script>
+</body>
+</html>
