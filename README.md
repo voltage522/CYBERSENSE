@@ -1,43 +1,45 @@
 # CyberSense
 
-Интерактивный тренажёр, который учит распознавать мошенников в интернете.
+An interactive trainer that teaches you to recognize online scams.
 
-**Сайт:** https://voltage522.github.io/cybersense/
+**Website:** https://voltage522.github.io/CYBERSENSE/
 
-> **Пре-релиз v0.1.0.** Это не финальная версия: задания ещё проходят проверку,
-> возможны ошибки и изменения.
+> **Pre-release v0.1.0.** This is not the final version: exercises are still being reviewed,
+> and things may change.
 
-## Что это
+## What it is
 
-CyberSense — учебный проект Улана Ержанулы. Вместо длинных статей пользователь тренируется на
-реалистичных ситуациях: SMS, письмах, сайтах, переписках и объявлениях — и учится понимать,
-где обычное сообщение, а где обман.
+CyberSense is a student project by Ulan Yerzhanuly. Instead of long articles, you practice on
+realistic situations — text messages, emails, websites, chats and listings — and learn to tell
+a normal message from a scam.
 
-## Как это работает
+The interface and lessons are currently in Russian.
 
-- **Карта уроков.** Пять разделов идут по тропе один за другим: следующий урок открывается после предыдущего.
-- **Короткие уроки.** В каждом — несколько заданий. После ответа сразу видно, верно или нет, и почему.
-- **Разные задания.** Оценить ситуацию, найти подвох в тексте, найти настоящий адрес сайта, ответить
-  мошеннику в чате, разложить по группам, расставить шаги по порядку, «правда или миф».
-- **Ошибки не теряются.** Неверное задание возвращается в конце урока.
-- **Испытание.** В конце раздела — проверка всех тем раздела с тремя «щитами».
-- **Мотивация.** Опыт (XP), звёзды за уроки, серия дней и цель на день.
+## How it works
 
-## Темы
+- **Lesson map.** Five sections follow one path: the next lesson unlocks after the previous one.
+- **Short lessons.** Each has a few exercises. After every answer you immediately see whether you were right, and why.
+- **Different exercise types.** Judge a situation, spot the red flags in a message, find the real website
+  address, reply to a scammer in a chat, sort items into groups, put steps in order, "true or myth".
+- **Mistakes come back.** A wrong exercise is repeated at the end of the lesson.
+- **Challenge.** Each section ends with a test of everything in it, with three "shields".
+- **Motivation.** Experience points (XP), stars for lessons, a daily streak and a daily goal.
 
-1. Фишинг в SMS и почте
-2. Фейковые сайты
-3. Мессенджеры
-4. Покупки онлайн
-5. Аккаунты и пароли
+## Topics
 
-## Три варианта ответа
+1. Phishing in SMS and email
+2. Fake websites
+3. Messengers
+4. Online shopping
+5. Accounts and passwords
 
-- **Безопасно** — признаков угрозы нет.
-- **Подозрительно** — стоит проверить через другой, надёжный способ.
-- **Мошенничество** — есть явные признаки обмана.
+## Three possible answers
 
-## Важно
+- **Safe** — no signs of a threat.
+- **Suspicious** — worth checking through another, trusted channel.
+- **Scam** — clear signs of fraud.
 
-Это учебный тренажёр, а не сервис проверки реальных сообщений. Все люди, номера и ссылки
-в заданиях вымышлены, учебные интерфейсы ничего не отправляют.
+## Note
+
+This is a training tool, not a service for checking real messages. All people, phone numbers and
+links in the exercises are fictional, and the simulated interfaces do not send anything.
