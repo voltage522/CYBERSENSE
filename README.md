@@ -2,7 +2,7 @@
 
 An interactive trainer that teaches you to recognize online scams.
 
-**Website:** https://voltage522.github.io/CYBERSENSE/
+**Website:** https://voltage522.github.io/CyberSense/
 
 > **Pre-release v0.1.0.** This is not the final version: exercises are still being reviewed,
 > and things may change.
